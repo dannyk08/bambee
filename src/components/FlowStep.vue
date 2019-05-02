@@ -1,6 +1,6 @@
 <template>
   <section class="flow-step" :class="{'active': step.active, 'disabled': step.disabled}">
-    <span>{{step.label}}</span>
+    <span>Schedule a call later</span>
   </section>
 </template>
 
@@ -18,7 +18,7 @@ $border-radius: 2rem;
   // default for all
   background: white;
   border: 1px solid var(--flow-step-background-color);
-  padding: 1rem;
+  padding: 0.5rem;
   height: 2.5rem;
   min-width: 10rem;
   display: flex;

@@ -5,6 +5,12 @@
       <section v-if="flowSteps && !!flowSteps.length" class="flow-steps">
         <FlowStep v-for="(step, index) in flowSteps" :step="step" :key="index"/>
       </section>
+
+      <Button>
+        <span>Schedule Call Later</span>
+      </Button>
+
+      <p>OR</p>
     </main>
   </div>
 </template>
@@ -14,12 +20,14 @@ import mockTimes from "./mockTimes";
 import { getTimeSlots, postScheduleOverview } from "./services";
 import Navigation from "./components/Navigation.vue";
 import FlowStep from "./components/FlowStep.vue";
+import Button from "./components/Button.vue";
 
 export default {
   name: "bb",
   components: {
     Navigation,
-    FlowStep
+    FlowStep,
+    Button
   },
   data: () => {
     return {
@@ -66,12 +74,13 @@ export default {
   display: flex;
   flex-direction: column;
   flex: 1;
+  align-items: center;
 }
 
 .flow-steps {
   display: flex;
   max-width: 75%;
-  margin: 1rem auto 0;
+  margin: 1rem auto;
 }
 </style>
 
