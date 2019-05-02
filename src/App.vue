@@ -1,8 +1,10 @@
 <template>
   <div class="bb-app">
     <Navigation/>
-    <main>
-      <h1>Test</h1>
+    <main class="flow-main">
+      <section v-if="flowSteps && !!flowSteps.length" class="flow-steps">
+        <FlowStep v-for="(step, index) in flowSteps" :step="step" :key="index"/>
+      </section>
     </main>
   </div>
 </template>
@@ -11,11 +13,34 @@
 import mockTimes from "./mockTimes";
 import { getTimeSlots, postScheduleOverview } from "./services";
 import Navigation from "./components/Navigation.vue";
+import FlowStep from "./components/FlowStep.vue";
 
 export default {
   name: "bb",
   components: {
-    Navigation
+    Navigation,
+    FlowStep
+  },
+  data: () => {
+    return {
+      flowSteps: [
+        {
+          label: "Create Account",
+          active: true,
+          disabled: false
+        },
+        {
+          label: "Schedule Intro",
+          active: false,
+          disabled: false
+        },
+        {
+          label: "Try Bambee",
+          active: false,
+          disabled: true
+        }
+      ]
+    };
   },
   mounted() {
     // getTimeSlots().then(console.log);
@@ -36,12 +61,32 @@ export default {
   flex-direction: column;
   flex: 1;
 }
+
+.flow-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.flow-steps {
+  display: flex;
+  max-width: 75%;
+  margin: 1rem auto 0;
+}
 </style>
 
 <style lang="scss">
+$primary-gray5: #bdbcbe;
+$primary-gray4: #a2a1a3;
+$primary-gray2: #6f6d70;
+$primary-purple: #825fa8;
+
 :root {
-  // --navigation-background-color: #4f3073;
-  --navigation-background-color: #825fa8;
+  --navigation-background-color: #{$primary-purple};
+  --flow-step-background-color: #{$primary-purple};
+  --flow-step-label-color: #{$primary-gray2};
+  --flow-step-disabled-border-color: #{$primary-gray5};
+  --flow-step-disabled-label-color: #{$primary-gray4};
 }
 </style>
 
