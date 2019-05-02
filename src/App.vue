@@ -5,9 +5,22 @@
 </template>
 
 <script>
+import mockTimes from "./mockTimes";
+import { getTimeSlots, postScheduleOverview } from "./services";
+
 export default {
   name: "app",
-  components: {}
+  components: {},
+  mounted() {
+    // getTimeSlots().then(console.log);
+    setTimeout(() => {
+      // postScheduleOverview({
+      //   schedule: 1556802000000,
+      //   phone: "999-999-9999"
+      // });
+      console.log(mockTimes);
+    }, 2000);
+  }
 };
 </script>
 
