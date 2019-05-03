@@ -19,8 +19,9 @@ export default {
   background: transparent;
   padding: 0.5rem;
   border: 1px solid whitesmoke;
-  border-radius: 0.5rem;
-  box-shadow: 0px 6px 6px -6px grey;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  font-weight: 600;
 
   &:focus {
     outline: none;

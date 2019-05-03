@@ -1,6 +1,6 @@
 <template>
   <nav class="nav">
-    <BambeeLogo class="nav-logo"/>
+    <BambeeLogo class="nav__logo"/>
   </nav>
 </template>
 
@@ -23,9 +23,9 @@ export default {
   align-items: center;
   max-height: 4rem;
   height: 4rem;
-}
 
-.nav-logo {
-  height: 50%;
+  &__logo {
+    height: 50%;
+  }
 }
 </style>

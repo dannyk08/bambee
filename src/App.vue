@@ -2,15 +2,18 @@
   <div class="bb-app">
     <Navigation/>
     <main class="flow-main">
-      <section v-if="flowSteps && !!flowSteps.length" class="flow-steps">
-        <FlowStep v-for="(step, index) in flowSteps" :step="step" :key="index"/>
-      </section>
+      <div class="flow-main__steps-container">
+        <section v-if="flowSteps && !!flowSteps.length" class="flow-main__steps-section">
+          <FlowStep v-for="(step, index) in flowSteps" :step="step" :key="index"/>
+        </section>
 
-      <Button>
-        <span>Schedule Call Later</span>
-      </Button>
+        <Button>
+          <span>Schedule Call Later</span>
+        </Button>
+      </div>
 
-      <p>OR</p>
+      <Separator :label="'OR'"/>
+      <Scheduler :schedules="schedules"/>
     </main>
   </div>
 </template>
@@ -21,13 +24,17 @@ import { getTimeSlots, postScheduleOverview } from "./services";
 import Navigation from "./components/Navigation.vue";
 import FlowStep from "./components/FlowStep.vue";
 import Button from "./components/Button.vue";
+import Scheduler from "./components/Scheduler.vue";
+import Separator from "./components/Separator.vue";
 
 export default {
   name: "bb",
   components: {
     Navigation,
     FlowStep,
-    Button
+    Button,
+    Scheduler,
+    Separator
   },
   data: () => {
     return {
@@ -47,18 +54,21 @@ export default {
           active: false,
           disabled: true
         }
-      ]
+      ],
+      schedules: null
     };
   },
   mounted() {
-    // getTimeSlots().then(console.log);
-    // setTimeout(() => {
-    // postScheduleOverview({
-    //   schedule: 1556802000000,
-    //   phone: "999-999-9999"
-    // });
-    // console.log(mockTimes);
-    // }, 2000);
+    setTimeout(() => {
+      getTimeSlots().then(data => {
+        this.schedules = data;
+      });
+      // postScheduleOverview({
+      //   schedule: 1556802000000,
+      //   phone: "999-999-9999"
+      // });
+      // console.log(mockTimes);
+    }, 500);
   }
 };
 </script>
@@ -74,13 +84,18 @@ export default {
   display: flex;
   flex-direction: column;
   flex: 1;
-  align-items: center;
-}
 
-.flow-steps {
-  display: flex;
-  max-width: 75%;
-  margin: 1rem auto;
+  &__steps-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+  }
+
+  &__steps-section {
+    display: flex;
+    margin-bottom: 1rem;
+  }
 }
 </style>
 
@@ -89,8 +104,12 @@ $primary-gray5: #bdbcbe;
 $primary-gray4: #a2a1a3;
 $primary-gray2: #6f6d70;
 $primary-purple: #825fa8;
+$box-shadow: 0px 6px 6px -6px #{$primary-gray2};
+$border-radius: 0.5rem;
 
 :root {
+  --border-radius: #{$border-radius};
+  --box-shadow: #{$box-shadow};
   --navigation-background-color: #{$primary-purple};
   --flow-step-background-color: #{$primary-purple};
   --flow-step-label-color: #{$primary-gray2};

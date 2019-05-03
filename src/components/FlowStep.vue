@@ -1,6 +1,6 @@
 <template>
   <section class="flow-step" :class="{'active': step.active, 'disabled': step.disabled}">
-    <span>Schedule a call later</span>
+    <span>{{step.label}}</span>
   </section>
 </template>
 
@@ -34,6 +34,7 @@ $border-radius: 2rem;
   &:last-of-type {
     border-top-right-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
+    border-left: none;
   }
 
   // :state => active, disabled
