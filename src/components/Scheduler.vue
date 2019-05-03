@@ -5,7 +5,12 @@
     </header>
 
     <main class="scheduler__main">
-      <SchedulePill v-for="(schedule, index ) in schedules" :key="index" :timeStamp="schedule"/>
+      <Schedule
+        v-for="(scheduleLabel, scheduleIndex) in Object.keys(schedules)"
+        :scheduleLabel="scheduleLabel"
+        :schedule="schedules[scheduleLabel]"
+        :key="scheduleIndex"
+      />
     </main>
 
     <footer class="scheduler__footer">
@@ -19,14 +24,19 @@
 
 <script>
 import Button from "./Button.vue";
-import SchedulePill from "./SchedulePill.vue";
+import Schedule from "./Schedule.vue";
 
 export default {
   name: "bb-scheduler",
   props: ["schedules"],
+  data() {
+    return {
+      scheduleList: []
+    };
+  },
   components: {
     Button,
-    SchedulePill
+    Schedule
   }
 };
 </script>
@@ -42,6 +52,7 @@ $padding: 0.5rem;
   flex-direction: column;
   border: $component-border;
   border-radius: var(--border-radius);
+  width: 100%;
   max-width: $height * 7;
   margin: 0 auto;
 
@@ -57,10 +68,8 @@ $padding: 0.5rem;
     max-height: $height * 6;
     overflow: auto;
     border-bottom: $component-border;
-    padding: $padding;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    flex-direction: column;
   }
 
   &__footer {

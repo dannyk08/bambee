@@ -13,14 +13,17 @@
       </div>
 
       <Separator :label="'OR'"/>
-      <Scheduler :schedules="schedules"/>
+      <Scheduler v-if="schedules" :schedules="schedules"/>
     </main>
   </div>
 </template>
 
 <script>
+import { formatToTimeZone } from "date-fns-timezone";
+import { format } from "date-fns";
+
 import mockTimes from "./mockTimes";
-import { getTimeSlots, postScheduleOverview } from "./services";
+// import { getTimeSlots } from "./services";
 import Navigation from "./components/Navigation.vue";
 import FlowStep from "./components/FlowStep.vue";
 import Button from "./components/Button.vue";
@@ -59,16 +62,48 @@ export default {
     };
   },
   mounted() {
-    setTimeout(() => {
-      getTimeSlots().then(data => {
-        this.schedules = data;
+    this.schedules = mockTimes.reduce((prev, timestamp) => {
+      let dayLabel = format(timestamp, "dddd, MMMM D, YYYY");
+      let fineLabel = formatToTimeZone(new Date(timestamp), "h:mm am", {
+        timeZone: "America/Los_Angeles"
       });
-      // postScheduleOverview({
-      //   schedule: 1556802000000,
-      //   phone: "999-999-9999"
-      // });
-      // console.log(mockTimes);
-    }, 500);
+      let timeZone = formatToTimeZone(new Date(timestamp), "z", {
+        timeZone: "America/Los_Angeles"
+      });
+      let cleanMicroseconds =
+        fineLabel.slice(0, fineLabel.indexOf("m") + 1) + " " + timeZone;
+      if (!(dayLabel in prev)) {
+        prev[dayLabel] = [cleanMicroseconds];
+      } else {
+        prev[dayLabel].push(cleanMicroseconds);
+      }
+      return prev;
+    }, {});
+
+    // getTimeSlots().then(data => {
+    //   this.schedules = data.reduce((prev, timestamp) => {
+    //     let dayLabel = format(timestamp, "dddd, MMMM D, YYYY");
+    //     let fineLabel = formatToTimeZone(new Date(timestamp), "h:mm am", {
+    //       timeZone: "America/Los_Angeles"
+    //     });
+    //     let timeZone = formatToTimeZone(new Date(timestamp), "z", {
+    //       timeZone: "America/Los_Angeles"
+    //     });
+    //     let cleanMicroseconds =
+    //       fineLabel.slice(0, fineLabel.indexOf("m") + 1) + " " + timeZone;
+    //     if (!(dayLabel in prev)) {
+    //       prev[dayLabel] = [cleanMicroseconds];
+    //     } else {
+    //       prev[dayLabel].push(cleanMicroseconds);
+    //     }
+    //     return prev;
+    //   }, {});
+    // });
+
+    // postScheduleOverview({
+    //   schedule: 1556802000000,
+    //   phone: "999-999-9999"
+    // });
   }
 };
 </script>

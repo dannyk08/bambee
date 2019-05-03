@@ -2,8 +2,7 @@ import { POST_SCHEDULE_OVERVIEW_URL, COMMON_HEADERS } from "../utils/constants";
 
 export function postScheduleOverview(data = { schedule: null, phone: null }) {
   if (data.phone === null || data.schedule === null) {
-    console.error("DATA cannot be null");
-    return;
+    throw new Error("DATA parameter keys cannot be null");
   }
 
   return fetch(POST_SCHEDULE_OVERVIEW_URL, {
