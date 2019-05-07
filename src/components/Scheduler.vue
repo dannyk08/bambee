@@ -54,7 +54,6 @@ $padding: 0.5rem;
   border-radius: var(--border-radius);
   width: 100%;
   max-width: $height * 7;
-  margin: 0 auto;
 
   &__header {
     display: flex;

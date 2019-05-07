@@ -1,13 +1,31 @@
 <template>
-  <section class="flow-step" :class="{'active': step.active, 'disabled': step.disabled}">
-    <span>{{step.label}}</span>
+  <section
+    class="flow-step"
+    :class="{
+      'active': signupStep.active, 
+      'disabled': signupStep.disabled
+    }"
+  >
+    <span>{{signupStep.label}}</span>
   </section>
 </template>
 
 <script>
 export default {
   name: "bb-flow-step",
-  props: ["step"]
+  props: {
+    signupStep: {
+      required: true,
+      default() {
+        return {
+          label: "",
+          route: "",
+          active: false,
+          disabled: false
+        };
+      }
+    }
+  }
 };
 </script>
 

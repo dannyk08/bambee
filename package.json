@@ -3,16 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prestart": "yarn || npm install",
-    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "prestart": "yarn || npm install",
+    "start": "vue-cli-service serve"
   },
   "dependencies": {
     "core-js": "^2.6.5",
     "date-fns": "^1.30.1",
     "date-fns-timezone": "^0.1.4",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.7.0",

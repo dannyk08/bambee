@@ -21,8 +21,10 @@ $label-background: lighten(lightgray, 12.5%);
   display: flex;
   position: relative;
   flex-direction: column;
-  height: $component-height;
+  min-height: $component-height;
   justify-content: center;
+  width: 100%;
+  flex: 1;
 
   &__break {
     width: 100%;
