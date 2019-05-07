@@ -37,6 +37,9 @@ $padding: 0.5rem;
     background: white;
     border-bottom: $component-border;
     font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 1;
   }
 
   &__stamp-list {
@@ -48,5 +51,3 @@ $padding: 0.5rem;
   }
 }
 </style>
-
-

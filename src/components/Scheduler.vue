@@ -70,6 +70,7 @@ $padding: 0.5rem;
     border-bottom: $component-border;
     display: flex;
     flex-direction: column;
+    position: relative;
   }
 
   &__footer {
