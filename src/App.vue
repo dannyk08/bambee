@@ -1,7 +1,7 @@
 <template>
   <div id="bb-app">
     <Navigation/>
-    <SignupSteps :signupSteps="signupSteps"/>
+    <SignupSteps :signupSteps="signupSteps" :currentRoute="$router.currentRoute.name"/>
     <router-view/>
   </div>
 </template>
@@ -9,6 +9,7 @@
 <script>
 import Navigation from "./components/Navigation.vue";
 import SignupSteps from "./components/SignupSteps.vue";
+import { signupSteps } from "./utils";
 
 export default {
   components: {
@@ -17,26 +18,7 @@ export default {
   },
   data() {
     return {
-      signupSteps: [
-        {
-          label: "Create Account",
-          route: "route",
-          active: true,
-          disabled: false
-        },
-        {
-          label: "Schedule Intro",
-          route: "route",
-          active: false,
-          disabled: false
-        },
-        {
-          label: "Try Bambee",
-          route: "route",
-          active: false,
-          disabled: true
-        }
-      ]
+      signupSteps
     };
   }
 };

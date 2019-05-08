@@ -1,16 +1,27 @@
 <template>
   <div class="signup-steps" v-if="signupSteps && signupSteps.length">
-    <SignupStep v-for="(signupStep, index) in signupSteps" :key="index" :signupStep="signupStep"/>
+    <SignupStep
+      v-for="(signupStep, index) in signupSteps"
+      :active="signupStep.name === currentRoute"
+      :key="index"
+      :disabled="false"
+      :signupStep="signupStep"
+    />
   </div>
 </template>
 
 <script>
 import SignupStep from "./SignupStep.vue";
+
 export default {
   props: {
     signupSteps: {
       required: true,
       default: []
+    },
+    currentRoute: {
+      required: true,
+      default: ""
     }
   },
   components: {
