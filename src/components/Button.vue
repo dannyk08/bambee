@@ -1,12 +1,20 @@
 <template>
-  <button class="button" @click="console.log('clicking me!')">
+  <button class="button" @click="buttonClick()">
     <slot>testing</slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: "bb-button"
+  name: "bb-button",
+  props: {
+    clickParam: null
+  },
+  methods: {
+    buttonClick() {
+      this.$emit("buttonClick", this.clickParam);
+    }
+  }
 };
 </script>
 

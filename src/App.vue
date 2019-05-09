@@ -12,6 +12,7 @@ import SignupSteps from "./components/SignupSteps.vue";
 import { signupSteps } from "./utils";
 
 export default {
+  name: "bb",
   components: {
     Navigation,
     SignupSteps

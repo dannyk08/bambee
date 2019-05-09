@@ -17,6 +17,7 @@ import Separator from "../components/Separator.vue";
 import Scheduler from "../components/Scheduler.vue";
 import Button from "../components/Button.vue";
 import mockTimes from "../mockTimes";
+import { getTimeSlots } from "./../services/timeSlots";
 
 export default {
   name: "bb-page-schedule-intro",
@@ -31,7 +32,7 @@ export default {
     };
   },
   mounted() {
-    this.scheduleData = mockTimes;
+    getTimeSlots().then(data => (this.scheduleData = data));
   },
   computed: {
     schedules() {

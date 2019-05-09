@@ -14,6 +14,7 @@
 import SignupStep from "./SignupStep.vue";
 
 export default {
+  name: "bb-signup-steps",
   props: {
     signupSteps: {
       required: true,
